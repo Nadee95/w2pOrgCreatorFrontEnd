@@ -1,0 +1,37 @@
+<div class="container">
+
+    <div class="card-body  justify-content-center">
+    <form [formGroup]="form"   (ngSubmit)="register()">
+
+        <div class="form-group">
+            <label >First Name</label>
+            <input type="text" class="form-control" formControlName="firstName" placeholder="first name">
+          </div>
+          <div class="form-group">
+            <label >Last Name</label>
+            <input type="text" class="form-control" formControlName="lastName" placeholder="last name">
+          </div>
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="email@example.com">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" class="form-control" formControlName="phone" placeholder="10 digit">
+          </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword2">Confirm Password</label>
+            <input type="password" class="form-control" formControlName="confirmPassword" placeholder="confirm-Password">
+          </div>
+       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
