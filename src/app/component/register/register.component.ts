@@ -41,21 +41,21 @@ export class RegisterComponent implements OnInit {
         phone: new FormControl("", [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(50)
+          Validators.maxLength(12)
         ]),
         password: new FormControl("", [
           Validators.required,
-          Validators.minLength(9),
+          Validators.minLength(6),
           Validators.maxLength(12)
         ]),
         confirmPassword: new FormControl("", [
           Validators.required,
           Validators.minLength(6),
-          Validators.maxLength(50)
+          Validators.maxLength(12)
         ])
       },
       {
-        validator: MustMatch("password", "confirmPassword")
+        validator:MustMatch("password", "confirmPassword")
       }
     );
 
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
   async register(){
    (await this.registerService.register(this.form.value)).subscribe((res)=>{
       console.log(res)//
-     // this.router.navigate(["/login"]);
+     this.router.navigate(["/login"]);
     },
     err => {
       
@@ -76,5 +76,7 @@ export class RegisterComponent implements OnInit {
     
     );
   }
+
+  get f() { return this.form.controls; }
 
 }

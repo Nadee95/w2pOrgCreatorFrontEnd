@@ -2,13 +2,17 @@
   <div class="container">
     <nav
       class="navbar navbar-expand-md navbar-light"
-      style="background-color: #45739e"
+      style="background-color: #b5d6f5"
     >
-      <a class="navbar-brand" routerLink="/">HOME</a>
+    <ul class="navbar-nav navbar-collapse justify-content-start">
 
+     <li> <a class="navbar-brand" routerLink="/">HOME</a></li>
+     <li ><a *ngIf="auth.isLoggedIn()" [routerLink]="[getNavUrl()]" class="nav-brand"  >Dashboard</a></li>
+    </ul>
       <ul class="navbar-nav navbar-collapse justify-content-end">
-        <li><a class="nav-link" routerLink="/login">Login</a></li>
-        <li><a class="nav-link" routerLink="/register">Sign Up</a></li>
+        <li><a *ngIf="!auth.isLoggedIn()" class="nav-link" routerLink="/login">Login</a></li>
+        <li><a *ngIf="!auth.isLoggedIn()" class="nav-link" routerLink="/register">Sign Up</a></li>
+        <li><a *ngIf="auth.isLoggedIn()" (click)="logout()" class="nav-link" href="/login">Logout</a></li>
       </ul>
     </nav>
   </div>

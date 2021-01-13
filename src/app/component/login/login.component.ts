@@ -6,7 +6,9 @@ import {
   Validators
 } from "@angular/forms";
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 import { LoginService } from 'src/app/service/login.service';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 
 @Component({
@@ -24,7 +26,7 @@ export class LoginComponent implements OnInit {
  
 
   constructor( public fb:FormBuilder,private zone: NgZone,private router: Router, private loginService
-    :LoginService) {
+    :LoginService,private auth:AuthService) {
 
     this.form = this.fb.group({
       email: new FormControl("", [
@@ -52,20 +54,23 @@ export class LoginComponent implements OnInit {
 
   async onFormSubmit() {
     (await this.loginService.login(this.form.value)).subscribe(
-      (      res: any) => {
-        console.log(res);
-        this.router.navigate(["/"]);
+      ( res: any) => {
+        this.auth.authenticate(res.jwt);
+       const name=this.auth.getUser().firstName;
+
+        this.router.navigate(["/dashboard",name]);
         // this.zone.run(() => {
         //  // this.form.reset();
         //    //can add query params
         // });
       },
-      (      error: { message: any; }) => {
+      (      error: any) => {
        
-        window.alert(error.message);
+        window.alert(error.error.message);
+        console.log(error.error.message);
       }
     );
-    console.log(this.form.value);
+    
   }
 
   get f() { return this.form.controls; }

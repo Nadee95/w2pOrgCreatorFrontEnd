@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +15,12 @@ export class LoginService {
   };
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private auth: AuthService) { }
 
 
   async login(credentials: any) {
-    console.log(credentials);
     return this.http.post(
-      "http://localhost:8080/authenticate",
+      environment.API_HOST+"authenticate",
       credentials
       ,this.httpOptions
     );

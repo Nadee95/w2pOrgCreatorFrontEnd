@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<div class="container">
+    <br>
+    <p>welocome  {{ this.getName() }}</p>
+</div>
+
+<div class="container">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">description</th>
+        <th scope="col">dateCreated</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let org of organizations">
+        <th scope="row">{{org.orgId}}</th>
+        <td>{{org.orgName}}</td>
+        <td>{{org.description}}</td>
+        <td>{{org.dateCreated}}</td>
+        <td (click)="updateOrganization(org.orgId)"><small>update</small></td>
+        <td (click)="deleteOrganization(org.orgId)"><small>delete</small></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="container">
+  <button class="btn-small btn-success" (click)="createOrganization()">Create new organization</button>
+</div>

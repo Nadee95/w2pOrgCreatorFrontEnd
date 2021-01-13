@@ -9,7 +9,10 @@ import { RegisterComponent } from './component/register/register.component';
 import { MenuComponent } from './component/menu/menu.component';
 import { FooterComponent } from './component/footer/footer.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpInterceptorService } from './service/http-interceptor.service';
+import { CreateOrganizationComponent } from './component/create-organization/create-organization.component';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     DashboardComponent,
+    CreateOrganizationComponent,
     
   ],
   imports: [
@@ -28,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
