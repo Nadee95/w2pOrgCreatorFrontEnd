@@ -12,6 +12,11 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './service/http-interceptor.service';
 import { CreateOrganizationComponent } from './component/create-organization/create-organization.component';
+import { UpdateOrganizationComponent } from './component/update-organization/update-organization.component';
+import { HomeComponent } from './component/home/home.component';
+import { OrganizationComponent } from './component/organization/organization.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -23,6 +28,9 @@ import { CreateOrganizationComponent } from './component/create-organization/cre
     FooterComponent,
     DashboardComponent,
     CreateOrganizationComponent,
+    UpdateOrganizationComponent,
+    HomeComponent,
+    OrganizationComponent,
     
   ],
   imports: [
@@ -30,7 +38,8 @@ import { CreateOrganizationComponent } from './component/create-organization/cre
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]

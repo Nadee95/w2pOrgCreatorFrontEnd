@@ -1,33 +1,87 @@
 <div class="container">
-    <br>
-    <p>welocome  {{ this.getName() }}</p>
+  <br />
+  <h4>
+    welocome <small>{{ this.getName() }}</small>
+  </h4>
 </div>
 
+<br />
 <div class="container">
-<table class="table table-hover">
+  <h6 class="text-center">Your organization details as follows</h6>
+  <h6>
+    <small>{{ organizations.length }} organizations</small>
+  </h6>
+</div>
+
+<br />
+<div class="container">
+  <table class="table table-dark table-hover">
     <thead>
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">description</th>
-        <th scope="col">dateCreated</th>
+        <th scope="col">Description</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Members</th>
+        <th scope="col"></th>
         <th scope="col"></th>
         <th scope="col"></th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let org of organizations">
-        <th scope="row">{{org.orgId}}</th>
-        <td>{{org.orgName}}</td>
-        <td>{{org.description}}</td>
-        <td>{{org.dateCreated}}</td>
-        <td (click)="updateOrganization(org.orgId)"><small>update</small></td>
-        <td (click)="deleteOrganization(org.orgId)"><small>delete</small></td>
+    <tbody
+      class="accordion-item"
+      *ngFor="let org of organizations; let i = index"
+    >
+      <tr class="table-info">
+        <th scope="row">{{ org.orgId }}</th>
+        <td style="color:black"> {{ org.orgName }}</td>
+        <td style="color:black">{{ org.description }}</td>
+        <td style="color:black">{{ org.dateCreated | date }}</td>
+        <td style="color:black">{{ org.members.length }}</td>
+        <td>
+          <a
+            href="#List-{{ i }}"
+            class="btn btn-outline-primary btn-sm"
+            data-toggle="collapse"
+            >TOGGLE VIEW</a
+          >
+        </td>
+        <td>
+          <button
+            (click)="updateOrganization(org.orgId)"
+            class="btn btn-outline-primary btn-sm"
+          >
+            UPDATE
+          </button>
+        </td>
+        <td>
+          <button
+            (click)="deleteOrganization(org.orgId, org.orgName)"
+            class="btn btn-outline-danger btn-sm"
+          >
+            DELETE
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div id="List-{{ i }}" class="collapse">
+            <br />
+            <app-organization
+              [oid]="org.orgId"
+              [members]="org.members"
+            ></app-organization>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
-<br>
+<br />
 <div class="container">
-  <button class="btn-small btn-success" (click)="createOrganization()">Create new organization</button>
+  <button class="btn btn-success" (click)="createOrganization()">
+    Create new organization
+  </button>
+  <br>
 </div>
+<br>

@@ -1,3 +1,5 @@
+import { Member } from "./Member";
+
 export class OrganizationDTO{
 
     
@@ -7,5 +9,6 @@ export class OrganizationDTO{
         public dateCreated: Date,
         public email: string,
         public user: object,
-        public description: string){   }
+        public description: string
+        ){   }
 }

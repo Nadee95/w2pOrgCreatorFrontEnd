@@ -43,7 +43,8 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+    this.f.email.setValue("hashan@mail.com");//for testing
+    this.f.password.setValue("123456");
   }
 
   alert(){
@@ -58,7 +59,7 @@ export class LoginComponent implements OnInit {
         this.auth.authenticate(res.jwt);
        const name=this.auth.getUser().firstName;
 
-        this.router.navigate(["/dashboard",name]);
+       this.router.navigate(["/dashboard",name]);
         // this.zone.run(() => {
         //  // this.form.reset();
         //    //can add query params
