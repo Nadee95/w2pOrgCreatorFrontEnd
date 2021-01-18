@@ -72,6 +72,7 @@ export class UpdateOrganizationComponent implements OnInit {
   }
 
   async updateOrganization() {
+    console.log( this.organizationDTO.user);
     this.organizationDTO = new OrganizationDTO(
       this.organizationDTO.orgId,
       this.f.orgName.value,

@@ -24,8 +24,12 @@ export class OrganizationComponent implements OnInit {
   form: FormGroup;
   constructor(private memberService: MemberService
     ,public fb:FormBuilder
-    , private router: Router
+    , private router: Router,
+    private route: ActivatedRoute
     ,private auth: AuthService) { 
+
+
+
     this.form = this.fb.group(
       {
         email: new FormControl("", [
@@ -56,11 +60,14 @@ export class OrganizationComponent implements OnInit {
       if(res){
         console.log(res);
         
-        if(window.confirm("The invitation was successfully sent to"+ this.f.name.value)){
+        if(window.confirm("The invitation was successfully sent to "+ this.f.name.value)){
           this.f.email.setValue("");
           this.f.name.setValue("");
           const name=this.auth.getUser().firstName;
-          this.router.navigate(["/dashboard",name]);
+          
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+          this.router.navigate(["dashboard",name]));
+          
       }
         }
         

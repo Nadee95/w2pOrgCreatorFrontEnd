@@ -7,15 +7,16 @@ import { LoginComponent } from './component/login/login.component';
 import { OrganizationComponent } from './component/organization/organization.component';
 import { RegisterComponent } from './component/register/register.component';
 import { UpdateOrganizationComponent } from './component/update-organization/update-organization.component';
+import { AuthGuardGuard } from './guard/auth-guard.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'dashboard/:name', component: DashboardComponent },
-  { path: 'create-organization', component: CreateOrganizationComponent },
-  { path: 'update-organization/:id', component: UpdateOrganizationComponent },
-  { path: 'organization/:oid', component: OrganizationComponent }
+  { path: 'register', component: RegisterComponent  },
+  { path: 'dashboard/:name', component: DashboardComponent, canActivate:[AuthGuardGuard] },
+  { path: 'create-organization', component: CreateOrganizationComponent , canActivate:[AuthGuardGuard]},
+  { path: 'update-organization/:id', component: UpdateOrganizationComponent , canActivate:[AuthGuardGuard] },
+  { path: 'organization/:oid', component: OrganizationComponent , canActivate:[AuthGuardGuard]}
 ];
 
 @NgModule({

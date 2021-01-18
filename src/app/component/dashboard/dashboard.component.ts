@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { OrganizationDTO } from 'src/app/dto/OrganizationDTO';
 import { OrgWithMembers } from 'src/app/dto/OrgWithMembers';
 import { AuthService } from 'src/app/service/auth.service';
@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router 
     ,private route: ActivatedRoute
     , private auth: AuthService,private orgService:OrganizationService) { 
+
       
     }
 
@@ -59,7 +60,7 @@ export class DashboardComponent implements OnInit {
   async deleteOrganization(oid:string, organizationName:string){
     console.log(oid);
 
-   if( window.confirm("Are you sure you want to delete " +organizationName+ " organization?")){
+   if( window.confirm("Are you sure you want to delete " +organizationName+ " organization? \nthis will delete your members also.")){
 
     (await this.orgService.deleteOrganization(oid)).subscribe((res:any)=>{
       if(res==-1){
